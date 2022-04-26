@@ -1,7 +1,6 @@
 #!/bin/bash
 
-source requests
-source limits
+source resource_vars
 
 function main(){
     local target=$1
