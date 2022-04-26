@@ -9,7 +9,7 @@ function get_resource_limits(){
     echo "export MEMORY_LIMIT=$memory_limit" >> resource_vars
 }
 
-function get_resorce_requests(){
+function get_resource_requests(){
     local dc=$1
     cpu_request=$(oc get dc/$dc -o jsonpath='{.spec.strategy.resources.requests.cpu}')
     echo "export CPU_REQUESTS=$cpu_requests" >> resource_vars
@@ -19,7 +19,7 @@ function get_resorce_requests(){
 
 function main(){
     get_resource_limits $1
-    get_resorce_requests $1
+    get_resource_requests $1
 }
 
 main $1
