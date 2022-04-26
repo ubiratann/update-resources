@@ -11,7 +11,7 @@ function get_resource_limits(){
 
 function get_resource_requests(){
     local dc=$1
-    cpu_request=$(oc get dc/$dc -o jsonpath='{.spec.strategy.resources.requests.cpu}')
+    cpu_requests=$(oc get dc/$dc -o jsonpath='{.spec.strategy.resources.requests.cpu}')
     echo "export CPU_REQUESTS=$cpu_requests" >> resource_vars
     memory_request=$(oc get dc/$dc -o jsonpath='{.spec.strategy.resources.requests.memory}')
     echo "export MEMORY_REQUESTS=$memory_request" >> resource_vars
