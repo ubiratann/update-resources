@@ -14,7 +14,7 @@ function get_resorce_requests(){
     cpu_request=$(oc get dc/$dc -o jsonpath='{.spec.strategy.resources.requests.cpu}')
     echo "export CPU_REQUESTS=$cpu_requests" > requests
     memory_request=$(oc get dc/$dc -o jsonpath='{.spec.strategy.resources.requests.memory}')
-    echo "export MEMORY_REQUESTS=$memory_request">> requests
+    echo "export MEMORY_REQUESTS=$memory_request" >> requests
 }
 
 function main(){
