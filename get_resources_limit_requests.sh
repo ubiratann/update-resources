@@ -22,8 +22,17 @@ function get_resource_requests(){
 }
 
 function main(){
-    get_resource_limits "$1"
-    get_resource_requests "$1"
+
+    local deployments_and_namespaces=$1
+    echo -e "\n"
+    while IFS= read -r line || [ -n "$line" ]
+    do
+        deployment_config=$(echo $line |  awk -F  ":" '{print $1}')
+        namespace=$(echo $line |  awk -F  ":" '{print $2}')
+
+        mkdir -p $namespace        
+
+    done < "$deployments_namespaces"
 }
 
-main "$1"
+main "$1" "$2"
