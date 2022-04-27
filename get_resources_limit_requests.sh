@@ -29,10 +29,21 @@ function main(){
         deployment_config=$(echo $line |  awk -F  ":" '{print $1}')
         namespace=$(echo $line |  awk -F  ":" '{print $2}')
 
-        mkdir -p $namespace/$deployment_config
 
-        get_resource_limits $deployment_config $namespace
-        get_resource_requests $deployment_config $namespace
+        if [ "$deployment_config" == '*' ]; then
+            oc get dc -n $namespace --no-headers | awk '{print $1}' > /tmp/$namespace/deployment_configs
+            mkdir -p  /tmp/$namespace/
+            while IFS= read -r tmp_deployment_config || [ -n "$tmp_deployment_config" ]
+            do
+                mkdir -p $namespace/$tmp_deployment_config
+                get_resource_limits $tmp_deployment_config $namespace
+                get_resource_requests $tmp_deployment_config $namespace
+            done < /tmp/$namespace/deployment_configs
+        else
+            mkdir -p $namespace/$deployment_config
+            get_resource_limits $deployment_config $namespace
+            get_resource_requests $deployment_config $namespace
+        fi
 
     done < "$read_file"
 }
