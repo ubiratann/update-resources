@@ -24,6 +24,8 @@ Execute o script usando a seguinte linha de comando:
 ```
 Onde  `<NOME_ARQUIVO>` é o nome de um arquivo em texto plano que lista os deployments que deseja atualizar as `resources` seus namespaces de origem e destino usando a seguinte estrura:
 
+O namespace de origem é nece
+
 ```
 <NOME_DEPLOYMENT_CONFIG_DESTINO>:<NAMESPACE_ORIGEM>:<NAMESPACE_DESTINO>
 <NOME_DEPLOYMENT_CONFIG_DESTINO_2>:<NAMESPACE_ORIGEM_2>:<NAMESPACE_DESTINO2>
