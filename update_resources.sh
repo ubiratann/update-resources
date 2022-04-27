@@ -29,9 +29,18 @@ function main(){
         source_namespace=$(echo $line |  awk -F  ":" '{print $2}')
         target_namespace=$(echo $line |  awk -F  ":" '{print $3}')
 
-        set_vars "$source_namespace" "$target_deployment_config"
-        update_resources "$target_deployment_config" "$target_namespace"
-        unset_vars
+        if [ "$target_deployment_config" == '*' ]; then
+            for file in $source_namespace/*/; do
+                tmp_deployment_config=$(echo $file  | awk -F "/" '{print $2}')
+                set_vars "$source_namespace" "$tmp_deployment_config"
+                update_resources "$tmp_deployment_config" "$target_namespace"
+                unset_vars
+            done
+        else
+            set_vars "$source_namespace" "$target_deployment_config"
+            update_resources "$target_deployment_config" "$target_namespace"
+            unset_vars
+        fi
 
     done < "$read_file"
 }
