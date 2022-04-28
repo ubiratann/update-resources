@@ -1,9 +1,6 @@
 #!/bin/bash
 
-export NOME='TESTE'
 
-echo "nome = $NOME"
-
-unset NOME
-
-echo "nome = $NOME"
+for file in teste/*/; do
+    echo $file #| awk -F "/" '{print $2}'
+done

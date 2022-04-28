@@ -31,8 +31,8 @@ function main(){
 
 
         if [ "$deployment_config" == '*' ]; then
-            oc get dc -n $namespace --no-headers | awk '{print $1}' > /tmp/$namespace/deployment_configs
             mkdir -p  /tmp/$namespace/
+            oc get dc -n $namespace --no-headers | awk '{print $1}' > /tmp/$namespace/deployment_configs
             while IFS= read -r tmp_deployment_config || [ -n "$tmp_deployment_config" ]
             do
                 mkdir -p $namespace/$tmp_deployment_config
