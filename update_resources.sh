@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -e 
 
 function set_vars(){
     local namespace="$1"
